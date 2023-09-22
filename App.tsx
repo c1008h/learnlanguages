@@ -26,6 +26,7 @@ export default function App() {
   const [choicesNotDropped, setChoicesNotDropped] = useState<string[]>([]);
 
   const fetchData = async () => {
+    initializeApp(firebaseConfig)
     const db = getFirestore()
 
     try {
