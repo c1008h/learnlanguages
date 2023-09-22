@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "498867021876",
+    "project_id": "testing-react-7e154",
+    "storage_bucket": "testing-react-7e154.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:498867021876:android:2761ad4260ec4a67ed0261",
+        "android_client_info": {
+          "package_name": "com.hongchris.learnlanguages"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "498867021876-kdngs5lhfg8jfp7tstrtahqpoibto1kl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKcFXTIZFt7IdvpI6Ow6TF-7dU4uJHM0I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "498867021876-kdngs5lhfg8jfp7tstrtahqpoibto1kl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
