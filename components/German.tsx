@@ -4,12 +4,10 @@ import { Text, View } from 'react-native';
 interface GermanProps {
     question: string;
     correct: string;
-    onButtonDrop: OnButtonDropType;
 }
 
-type OnButtonDropType = () => void;
 
-const German: React.FC<GermanProps> = ({ question, correct, onButtonDrop }) => {
+const German: React.FC<GermanProps> = ({ question, correct }) => {
     // console.log('correct:', correct)
     // console.log('question:', question)
 
@@ -22,7 +20,7 @@ const German: React.FC<GermanProps> = ({ question, correct, onButtonDrop }) => {
 
     return (
         <View>
-            <Text>{updatedSentence}</Text>
+            <Text style={{color:'rgb(228, 231, 232)'}}>{updatedSentence}</Text>
         </View>
     )
 }

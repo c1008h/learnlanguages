@@ -7,13 +7,14 @@ export const styles = StyleSheet.create({
       alignItems: 'center',
       backgroundColor:'rgb(117, 217, 254)',
       height:'100%',
+      width:'100%'
     },
     card: {
       backgroundColor:'rgb(59, 108, 129)',
       textAlign:'center',
       alignItems:'center',
       color:'rgb(248, 251, 252)',
-      padding:15,
+    //   padding:15,
       marginTop:'50%',
       height:'100%',
       width:'100%',
@@ -42,17 +43,45 @@ export const styles = StyleSheet.create({
         borderRadius:15,
         alignItems: 'center',
         justifyContent: 'center',
+        
+    },
+    selectedChoice:{
+        backgroundColor:'rgb(228, 231, 232)',
+
     },
 
-    button: {
-        backgroundColor:'rgb(99, 145, 166)',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding:10,
-        borderRadius:25,
-    },
+    // button: {
+    //     backgroundColor:'rgb(99, 145, 166)',
+    //     alignItems: 'center',
+    //     justifyContent: 'center',
+    //     padding:10,
+    //     borderRadius:25,
+    // },
     underlinedText: {
         textDecorationLine:'underline',
         backgroundColor:'black'
+    },
+
+    resultscreen: {
+        width:'100%',
+        height:'40%',
+        position:'absolute',
+        bottom:0,
+        borderRadius:15,
+        padding:'10%'
+    },
+    correctresultscreen: {
+        backgroundColor:'rgb(28, 227, 233)',
+    },
+    incorrectresultscreen: {
+        backgroundColor:'rgb(254, 122, 134)',
+    },
+    nextButton: {
+        backgroundColor:'rgb(228, 231, 232)',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding:'5%',
+        marginTop: '5%',
+        borderRadius:15,
     }
 });

@@ -11,11 +11,11 @@ const English: React.FC<EnglishProps> = ({ question, underline }) => {
 
     return (
         <View>
-            <Text>
+            <Text style={{color:'rgb(228, 231, 232)'}}>
                 {words.map((words, index) => (
                 <React.Fragment key={index}>
                     {index > 0 && (
-                    <Text style={{ textDecorationLine: 'underline' }}>{underline}</Text>
+                    <Text style={{ textDecorationLine: 'underline', fontWeight:'bold' }}>{underline}</Text>
                     )}
                     <Text>{words}</Text>
                 </React.Fragment>

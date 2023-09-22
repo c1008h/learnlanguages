@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from 'react'
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View } from 'react-native';
 import { firebaseConfig } from './firebaseConfig';
 import { collection, getDocs } from 'firebase/firestore'
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import {styles} from './styles'
-import CheckButton from './components/CheckButton'
+import NextButton from './components/NextButton'
+import Result from './components/Results'
 import English from './components/English';
 import German from './components/German';
 import Choices from './components/Choices'
-import Draggable from 'react-native-draggable'; 
 
 type Question = {
   english: string;
@@ -22,12 +22,16 @@ type Question = {
 export default function App() {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [draggedButton, setDraggedButton] = useState<string | null>(null);
-  const [choicesNotDropped, setChoicesNotDropped] = useState<string[]>([]);
+  const [selectedChoice, setSelectedChoice] = useState<string | null>(null);
+  const [showResult, setShowResult] = useState<boolean | null>(false);
+  const [isCorrect, setIsCorrect] = useState<boolean | null>(false);
+
 
   const fetchData = async () => {
-    initializeApp(firebaseConfig)
-    const db = getFirestore()
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app)
+
+    // const db = getFirestore()
 
     try {
       const querySnapshot = await getDocs(collection(db,'languagequiz'))
@@ -44,20 +48,29 @@ export default function App() {
     fetchData()
   },[])
 
-  const handleButtonDragStart = (choice: string) => {
-    // When a button is dragged, store its value and remove it from choicesNotDropped
-    setDraggedButton(choice);
-    setChoicesNotDropped(choicesNotDropped.filter((c) => c !== choice));
+  const handleChoicePress = (choice: string) => {
+    setSelectedChoice(choice); 
+    handleCheckAnswer(choice)
   };
-  const handleButtonDrop = () => {
-    // Handle the button drop logic
-    // Determine where it was dropped within the German text
-    // Replace the "__________" placeholder with the dropped button
+  
+  const handleCheckAnswer = (selectedChoice:string) => {
+    console.log(questions[currentQuestionIndex].correct)
+    console.log(selectedChoice)
+
+    if (selectedChoice?.toLocaleLowerCase() == questions[currentQuestionIndex].correct.toLowerCase()) {
+      setIsCorrect(true);
+    } else {
+      setIsCorrect(false);
+    }
+    setShowResult(true);
   };
 
   const handleNextQuestion = () => {
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setSelectedChoice(null); 
+      setShowResult(false);
+      setIsCorrect(null); 
     } else {
       alert('All questions completed!')
     }
@@ -66,7 +79,7 @@ export default function App() {
   return (
     <View style={styles.container}>
         <View style={styles.card}>
-          <Text>This is home page to display questions</Text>
+          <Text style={{color:'rgb(228, 231, 232)'}}>Fill in the missing word</Text>
 
             {questions && questions.length > 0 && (
               <View style={styles.cardContent}>
@@ -78,19 +91,29 @@ export default function App() {
                 <German 
                   question={questions[currentQuestionIndex].german}
                   correct={questions[currentQuestionIndex].correct}
-                  onButtonDrop={handleButtonDrop}
                 />
 
                 <Choices 
                   choices={questions[currentQuestionIndex].choices}
-                  handleButtonDragStart={handleButtonDragStart}
+                  selectedChoice={selectedChoice}
+                  handleCheckAnswer={handleCheckAnswer}
+                  correct={questions[currentQuestionIndex].correct}
+                  handleChoicePress={handleChoicePress}
                 />
               </View>
             )}
-
-          {currentQuestionIndex < questions.length && (
-            <CheckButton />
-          )}
+            {showResult && (
+              <View style={[styles.resultscreen, isCorrect ? styles.correctresultscreen : styles.incorrectresultscreen]}>
+                <Result 
+                  isCorrect={isCorrect}
+                  correct={questions[currentQuestionIndex].correct}
+                />
+                <NextButton 
+                  isCorrect={isCorrect}
+                  handleNextQuestion={handleNextQuestion}
+                />
+              </View>
+            )}
         </View>
     </View>
   );
