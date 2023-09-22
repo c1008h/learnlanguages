@@ -1,4 +1,5 @@
 # English-to-German Language Quiz App
+![learninglanguages](https://github.com/c1008h/learnlanguages/assets/102135325/7bb73a69-0974-4390-a309-9ff37e7f8901)
 
 ## Description
 
